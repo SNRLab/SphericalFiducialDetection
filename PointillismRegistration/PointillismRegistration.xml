@@ -33,7 +33,7 @@
       <description><![CDATA[Blurred Volume]]></description>
     </image>
   </parameters>
-
+  
   <parameters>
     <label>Hough Transform</label>
     <description><![CDATA[Hough Transform parameters]]></description>
@@ -113,13 +113,6 @@
     <label>Hessian Objectness</label>
     <description><![CDATA[Hessian Objectness parameters]]></description>
     <double>
-      <label>Sigma</label>
-      <description><![CDATA[Sigma]]></description>
-      <name>sigma</name>
-      <longflag>--sigma</longflag>
-      <default>1.0</default>
-    </double>
-    <double>
       <label>Alpha</label>
       <description><![CDATA[Alpha]]></description>
       <name>alpha</name>
@@ -138,6 +131,32 @@
       <description><![CDATA[Gamma]]></description>
       <name>gamma</name>
       <longflag>--gamma</longflag>
+      <default>1.0</default>
+    </double>
+  </parameters>
+
+  <parameters>
+    <label>Multi Scale Parameters</label>
+    <description><![CDATA[Hessian Objectness parameters]]></description>
+    <double>
+      <label>Min Sigma</label>
+      <description><![CDATA[Min Sigma]]></description>
+      <name>minSigma</name>
+      <longflag>--minSigma</longflag>
+      <default>1.0</default>
+    </double>
+    <double>
+      <label>Max Sigma</label>
+      <description><![CDATA[Max Sigma]]></description>
+      <name>maxSigma</name>
+      <longflag>--maxSigma</longflag>
+      <default>1.0</default>
+    </double>
+    <double>
+      <label>Sigma step</label>
+      <description><![CDATA[Sigma Step]]></description>
+      <name>stepSigma</name>
+      <longflag>--stepSigma</longflag>
       <default>1.0</default>
     </double>
   </parameters>

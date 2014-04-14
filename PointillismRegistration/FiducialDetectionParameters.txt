@@ -1,0 +1,21 @@
++ HoughTransform
+  - Threshold: 0
+  - Number Of Spheres: 4
+  - Sigma Gradient: 1.0
+  - Gradient Threshold: 0.1
+  - Minimum Radius: 5
+  - Maximum Radius: 5
+  - Variance: 1.0
+  - Output Threshold: 0.5
+  - Sphere Radius Ratio: 1.0
+  - Voting Radius Ratio: 0.5
+
++ Hessian Objectness
+  - Alpha: 0.8
+  - Beta: 0.8
+  - Gamma: 0.8
+
++ Multi Scale Parameters
+  - Min Sigma: 3.0
+  - Max Sigma: 3.0
+  - Sigma Step: 1
