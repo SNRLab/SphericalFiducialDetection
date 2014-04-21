@@ -102,8 +102,11 @@ int DoIt( int argc, char * argv[], T )
   typedef typename HoughTransformFilterType::SpheresListType SpheresListType;
   SpheresListType spheresList = hFilter->GetSpheres();
 
-  std::cerr << "Number of sphere detected: " << spheresList.size() << std::endl
-	    << "----------------------------------" << std::endl << std::endl;
+  if (debugSwitch)
+    {
+    std::cout << "Number of sphere detected: " << spheresList.size() << std::endl
+	      << "----------------------------------" << std::endl << std::endl;
+    }
 
   unsigned int count = 1;
   typename SpheresListType::const_iterator itSpheres = spheresList.begin();  
@@ -127,11 +130,14 @@ int DoIt( int argc, char * argv[], T )
 				PhysicalOffset[1]*imageDirection[2][1] + 
 				PhysicalOffset[2]*imageDirection[2][2]);
     
-    std::cerr << "Fiducial " << count << ": " << std::endl
-	      << "  Pixel Offset: " << offset << std::endl
-	      << "  Center (RAS): " << RASCenter[0] << "," << RASCenter[1] << "," << RASCenter[2] << std::endl
-	      << "  Radius: " << (*itSpheres)->GetRadius()[0] << std::endl
-	      << std::endl;
+    if (debugSwitch)
+      {
+      std::cout << "Fiducial " << count << ": " << std::endl
+		<< "  Pixel Offset: " << offset << std::endl
+		<< "  Center (RAS): " << RASCenter[0] << "," << RASCenter[1] << "," << RASCenter[2] << std::endl
+		<< "  Radius: " << (*itSpheres)->GetRadius()[0] << std::endl
+		<< std::endl;
+      }
 
     csvFile << "houghFiducial_" << count << "," 
 	    << RASCenter[0] << "," 
@@ -145,8 +151,12 @@ int DoIt( int argc, char * argv[], T )
     }
 
   csvFile.close();
-  std::cerr << "----------------------------------" << std::endl;
-  
+
+  if (debugSwitch)
+    {
+    std::cout << "----------------------------------" << std::endl;
+    }
+
   return EXIT_SUCCESS;
 }
 

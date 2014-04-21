@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <executable>
   <category>Registration</category>
-  <title>SphericalFiducialDetection</title>
-  <description><![CDATA[This is a CLI module (based on GaussianBlurImageFilter) bundled in an extension]]></description>
+  <title>Spherical Fiducial Detection</title>
+  <description><![CDATA[This module detects spherical fiducials in a volume and create a list of markups at the center of the detected fiducials]]></description>
   <version>0.0.1</version>
   <documentation-url>http://www.slicer.org/slicerWiki/index.php/Documentation/4.3/Modules/SphericalFiducialDetection</documentation-url>
   <license>Slicer</license>
@@ -145,6 +145,17 @@
       <longflag>--stepSigma</longflag>
       <default>1.0</default>
     </double>
+  </parameters>
+
+  <parameters advanced="true">
+    <label>Debug pane</label>
+    <boolean>
+      <name>debugSwitch</name>
+      <label>Debug</label>
+      <description><![CDATA[Click this checkbox to see debugging output.]]></description>
+      <flag>d</flag>
+      <default>false</default>
+    </boolean>
   </parameters>
 
 </executable>
