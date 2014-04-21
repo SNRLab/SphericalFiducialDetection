@@ -93,7 +93,7 @@ int DoIt( int argc, char * argv[], T )
 
   // Create csv file with fiducial center positions
   std::ofstream csvFile;
-  csvFile.open("/home/snr/HoughFiducials.fcsv", std::ios::out);
+  csvFile.open("/home/snr/SphericalFiducialDetected.fcsv", std::ios::out);
   csvFile << "# Markups fiducial file version = 4.3" << std::endl
 	  << "# CoordinateSystem = 0" << std::endl
 	  << "# columns = id,x,y,z,ow,ox,oy,oz,vis,sel,lock,label,desc,associatedNodeID" << std::endl;
