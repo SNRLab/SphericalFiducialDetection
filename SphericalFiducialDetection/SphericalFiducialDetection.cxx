@@ -48,6 +48,26 @@ int DoIt( int argc, char * argv[], T )
   typedef itk::HoughTransformRadialVotingImageFilter<InternalImageType, InternalImageType> 
     HoughTransformFilterType;
 
+  // Create csv file with fiducial center positions
+  if (outputFile.size() <= 0)
+    {
+    std::cerr << "Error with the output file" << std::endl;
+    return EXIT_FAILURE;
+    }
+
+  std::ofstream csvFile;
+  csvFile.open(outputFile.c_str(), std::ios::out); 
+  if (!csvFile.is_open())
+    {
+    std::cerr << "Cannot open output file: " << outputFile << std::endl
+	      << "Make sure the path is correct" << std::endl;
+    return EXIT_FAILURE;
+    }
+
+  csvFile << "# Markups fiducial file version = 4.3" << std::endl
+	  << "# CoordinateSystem = 0" << std::endl
+	  << "# columns = id,x,y,z,ow,ox,oy,oz,vis,sel,lock,label,desc,associatedNodeID" << std::endl;
+
   // Read input volume
   typename ReaderType::Pointer reader = ReaderType::New();
   reader->SetFileName( inputVolume.c_str() );
@@ -63,7 +83,8 @@ int DoIt( int argc, char * argv[], T )
   hessianObjectness->SetGamma(gamma);
   hessianObjectness->SetObjectDimension(0);
 
-  typename MultiScaleEnhancementFilterType::Pointer multiScale = MultiScaleEnhancementFilterType::New();
+  typename MultiScaleEnhancementFilterType::Pointer multiScale =
+    MultiScaleEnhancementFilterType::New();
   multiScale->SetInput(reader->GetOutput());
   multiScale->SetSigmaMinimum(minSigma);
   multiScale->SetSigmaMaximum(maxSigma);
@@ -72,7 +93,8 @@ int DoIt( int argc, char * argv[], T )
   multiScale->Update();
 
   // Apply Hough Transform
-  typename HoughTransformFilterType::Pointer hFilter = HoughTransformFilterType::New();
+  typename HoughTransformFilterType::Pointer hFilter = 
+    HoughTransformFilterType::New();
   hFilter->SetInput( multiScale->GetOutput() );
   hFilter->SetNumberOfSpheres( numberOfSpheres );
   hFilter->SetMinimumRadius( minRadius );
@@ -91,17 +113,11 @@ int DoIt( int argc, char * argv[], T )
   typename InputImageType::PointType     origin         = reader->GetOutput()->GetOrigin();
   typename InputImageType::SpacingType   spacing        = reader->GetOutput()->GetSpacing();
 
-  // Create csv file with fiducial center positions
-  std::ofstream csvFile;
-  csvFile.open("/home/snr/SphericalFiducialDetected.fcsv", std::ios::out);
-  csvFile << "# Markups fiducial file version = 4.3" << std::endl
-	  << "# CoordinateSystem = 0" << std::endl
-	  << "# columns = id,x,y,z,ow,ox,oy,oz,vis,sel,lock,label,desc,associatedNodeID" << std::endl;
-
   typedef itk::EllipseSpatialObject<Dimension>::TransformType::OffsetType Coordinate;
   typedef typename HoughTransformFilterType::SpheresListType SpheresListType;
   SpheresListType spheresList = hFilter->GetSpheres();
 
+  // Output fiducials center
   if (debugSwitch)
     {
     std::cout << "Number of sphere detected: " << spheresList.size() << std::endl

@@ -18,6 +18,13 @@
       <index>0</index>
       <description><![CDATA[Input volume]]></description>
     </image>
+    <file fileExtensions=".fcsv">
+      <name>outputFile</name>
+      <label>Output File</label>
+      <longflag>--outputFile</longflag>
+      <description><![CDATA[Output Fiducial Detected File]]></description>
+      <default>./SphericalFiducialsDetected.fcsv</default>
+    </file>
   </parameters>
   
   <parameters>
