@@ -159,7 +159,7 @@ int DoIt( int argc, char * argv[], T )
 	    << RASCenter[0] << "," 
 	    << RASCenter[1] << "," 
 	    << RASCenter[2] << "," 
-	    << "0,0,0,1,1,1,0," << count << ",," << std::endl;
+	    << "0,0,0,1,1,1,1," << count << ",," << std::endl;
     
     // Add seed in confidence connected filter
     ++itSpheres;
