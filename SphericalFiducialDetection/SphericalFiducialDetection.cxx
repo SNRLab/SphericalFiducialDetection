@@ -124,7 +124,7 @@ int DoIt( int argc, char * argv[], T )
 	      << "----------------------------------" << std::endl << std::endl;
     }
 
-  unsigned int count = 1;
+  unsigned int count = 0;
   typename SpheresListType::const_iterator itSpheres = spheresList.begin();  
   while(itSpheres != spheresList.end())
     {
@@ -148,23 +148,25 @@ int DoIt( int argc, char * argv[], T )
     
     if (debugSwitch)
       {
-      std::cout << "Fiducial " << count << ": " << std::endl
+      std::cout << "Fiducial " << count+1 << ": " << std::endl
 		<< "  Pixel Offset: " << offset << std::endl
 		<< "  Center (RAS): " << RASCenter[0] << "," << RASCenter[1] << "," << RASCenter[2] << std::endl
 		<< "  Radius: " << (*itSpheres)->GetRadius()[0] << std::endl
 		<< std::endl;
       }
 
-    csvFile << "houghFiducial_" << count << "," 
+    csvFile << "houghFiducial_" << count+1 << ","
 	    << RASCenter[0] << "," 
 	    << RASCenter[1] << "," 
 	    << RASCenter[2] << "," 
-	    << "0,0,0,1,1,1,1," << count << ",," << std::endl;
+	    << "0,0,0,1,1,1,1," << count+1 << ",," << std::endl;
     
     // Add seed in confidence connected filter
     ++itSpheres;
     ++count;
     }
+
+  numberOfFiducialDetected = count;
 
   csvFile.close();
 
@@ -172,6 +174,11 @@ int DoIt( int argc, char * argv[], T )
     {
     std::cout << "----------------------------------" << std::endl;
     }
+
+  std::ofstream rts;
+  rts.open(returnParameterFile.c_str());
+  rts << "numberOfFiducialDetected = " << count << std::endl;
+  rts.close();
 
   return EXIT_SUCCESS;
 }

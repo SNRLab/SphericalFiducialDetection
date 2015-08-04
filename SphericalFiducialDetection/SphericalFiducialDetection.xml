@@ -154,13 +154,23 @@
     </double>
   </parameters>
 
+  <parameters>
+    <label>Results</label>
+    <integer>
+      <label>Fiducial Detected</label>
+      <name>numberOfFiducialDetected</name>
+      <channel>output</channel>
+      <default>0</default>
+    </integer>
+  </parameters>
+
   <parameters advanced="true">
-    <label>Debug pane</label>
+    <label>Debug</label>
     <boolean>
       <name>debugSwitch</name>
       <label>Debug</label>
       <description><![CDATA[Click this checkbox to see debugging output.]]></description>
-      <flag>d</flag>
+      <longflag>--debug</longflag>
       <default>false</default>
     </boolean>
   </parameters>
